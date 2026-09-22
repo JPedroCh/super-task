@@ -1,4 +1,4 @@
-# Job Board
+# Athyna [Super Task]
 
 A mobile-first job board built with React, TypeScript, and Vite. Two real pages — a job board and a job details page — plus two mock pages that demonstrate a sign-up flow and an external application flow, with no real backend or authentication.
 
