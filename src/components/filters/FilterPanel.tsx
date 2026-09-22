@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Stack from "@mui/material/Stack";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -97,6 +97,17 @@ interface FilterPanelProps {
  */
 export default function FilterPanel({ filters, onApply, onClear, onApplied }: FilterPanelProps) {
   const [draft, setDraft] = useState<FilterDraft>(() => filtersToDraft(filters));
+
+  // Resync the staged draft whenever the committed filters change from
+  // outside this panel — clearing filters, removing an active-filter chip,
+  // or a contextual filter chip on the details page. Without this, the
+  // desktop sidebar (which stays mounted continuously, unlike the mobile
+  // drawer) keeps showing stale selections after an external clear, and
+  // clicking "Apply filters" would silently re-apply them, undoing the
+  // clear entirely.
+  useEffect(() => {
+    setDraft(filtersToDraft(filters));
+  }, [filters]);
 
   const salaryRangeInvalid = useMemo(() => {
     const min = draft.minSalary.trim() ? Number(draft.minSalary) : undefined;
