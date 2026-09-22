@@ -130,7 +130,8 @@ export default function JobDetailsPage() {
             <Chip icon={<PlaceOutlinedIcon />} label={job.location.locality} variant="outlined" />
           )}
           {job.location.isRemote && (
-            <Chip icon={<PublicIcon />} label="Remote" color="secondary" variant="outlined" />
+            // Filled, not outlined — see the matching note in JobCard.tsx.
+            <Chip icon={<PublicIcon />} label="Remote" color="secondary" variant="filled" />
           )}
           {seniorityLabel && <Chip label={seniorityLabel} variant="outlined" />}
           {job.employmentType && <Chip label={job.employmentType} variant="outlined" />}
