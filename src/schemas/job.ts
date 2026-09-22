@@ -9,7 +9,13 @@ import { z } from "zod";
  */
 export const JobSchema = z.object({
   id: z.string().uuid(),
-  slug: z.string(),
+  // Nullable like everything else here — confirmed on a real record (an
+  // Athyna-posted "Senior Full-Stack Engineer" job, notably one of the very
+  // few in the live dataset with `skills` populated) that the API returns
+  // `slug: null`. Requiring a string silently dropped that job from every
+  // response via the per-item validation in api/jobs.ts — not a hypothetical,
+  // an actual real job was invisible in every search because of this.
+  slug: z.string().nullable().optional(),
   title: z.string(),
   url: z.string().nullable().optional(),
   applicationUrl: z.string().nullable().optional(),
