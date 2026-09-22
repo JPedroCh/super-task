@@ -65,7 +65,10 @@ export default function JobCard({ job, position }: JobCardProps) {
               />
             )}
             {job.location.isRemote && (
-              <Chip size="small" color="secondary" variant="outlined" icon={<PublicIcon />} label="Remote" />
+              // Filled, not outlined: the brand's mint secondary only meets
+              // contrast requirements as a fill with dark text, not as text
+              // color on its own (see src/theme.ts).
+              <Chip size="small" color="secondary" variant="filled" icon={<PublicIcon />} label="Remote" />
             )}
             {seniorityLabel && <Chip size="small" variant="outlined" label={seniorityLabel} />}
             {job.employmentType && <Chip size="small" variant="outlined" label={job.employmentType} />}

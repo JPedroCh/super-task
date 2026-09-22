@@ -2,11 +2,10 @@ import { Outlet, Link as RouterLink, useLocation } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
+import athynaLogo from "../../assets/athyna-logo.svg";
 
 const skipLinkSx = {
   position: "absolute",
@@ -35,19 +34,14 @@ export default function AppLayout() {
           <Box
             component={RouterLink}
             to="/jobs"
+            aria-label="Athyna — go to job board"
             sx={{
               display: "flex",
               alignItems: "center",
-              gap: 1,
-              textDecoration: "none",
-              color: "text.primary",
               mr: "auto",
             }}
           >
-            <WorkOutlineIcon color="primary" />
-            <Typography variant="h3" component="span" sx={{ fontSize: "1.05rem" }}>
-              Job Board
-            </Typography>
+            <Box component="img" src={athynaLogo} alt="Athyna" sx={{ height: 20, width: "auto" }} />
           </Box>
           <Button
             component={RouterLink}
