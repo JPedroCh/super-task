@@ -3,7 +3,9 @@ import type { AnalyticsEvent, AnalyticsEventName } from "./types";
 const STORAGE_KEY = "mockPostHog:events";
 const MAX_STORED_EVENTS = 500;
 
-type Listener = (event: AnalyticsEvent) => void;
+// `event` is omitted for a clear() notification — there's no single event
+// to report, just "the store changed, re-read it."
+type Listener = (event?: AnalyticsEvent) => void;
 
 function safeSessionStorage(): Storage | null {
   try {
@@ -79,6 +81,10 @@ class MockPostHog {
   clear(): void {
     this.events = [];
     this.persist();
+    // Without this, subscribers (the dashboard) never learn the store
+    // changed — the UI keeps showing stale data until some unrelated
+    // event happens to trigger a re-render.
+    for (const listener of this.listeners) listener();
   }
 }
 
