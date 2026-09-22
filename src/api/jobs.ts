@@ -41,7 +41,11 @@ export async function fetchJobs(
   }
 
   if (droppedCount > 0) {
-    console.warn(`[jobs api] dropped ${droppedCount} malformed job record(s) from the response`);
+    // Dev-only diagnostic — the count (never the record contents) is also
+    // captured as a proper analytics event for production visibility.
+    if (import.meta.env.DEV) {
+      console.warn(`[jobs api] dropped ${droppedCount} malformed job record(s) from the response`);
+    }
     analytics.track("api_response_invalid", { endpoint: "jobs_list", droppedCount });
   }
 

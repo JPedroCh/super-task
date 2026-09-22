@@ -53,7 +53,11 @@ class MockPostHog {
     this.events.push(event);
     if (this.events.length > MAX_STORED_EVENTS) this.events.shift();
     this.persist();
-    console.info("[Mock PostHog]", event.event, event.properties);
+    // Dev-only console trace of mock events — /mock-analytics is the
+    // supported way to inspect them; production builds stay quiet.
+    if (import.meta.env.DEV) {
+      console.info("[Mock PostHog]", event.event, event.properties);
+    }
     for (const listener of this.listeners) listener(event);
   }
 
