@@ -26,18 +26,23 @@ export default function ResultsSummaryBar({
 }: ResultsSummaryBarProps) {
   return (
     <Stack
-      direction="row"
-      alignItems="center"
-      justifyContent="space-between"
+      direction={{ xs: "column", sm: "row" }}
+      alignItems={{ xs: "flex-start", sm: "center" }}
+      justifyContent={{ xs: "flex-start", sm: "space-between" }}
       spacing={1.5}
       sx={{ mb: 2, flexWrap: "wrap", rowGap: 1 }}
     >
-      <Typography variant="body2" color="text.secondary" aria-live="polite">
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        aria-live="polite"
+        sx={{ order: { xs: 2, sm: 0 } }}
+      >
         {totalItems === null
           ? "Loading jobs…"
           : `${totalItems.toLocaleString()} job${totalItems === 1 ? "" : "s"} found`}
       </Typography>
-      <Stack direction="row" spacing={0.5} alignItems="center">
+      <Stack direction="row" spacing={0.5} alignItems="center" sx={{ order: { xs: 1, sm: 0 } }}>
         <TextField
           select
           size="small"
