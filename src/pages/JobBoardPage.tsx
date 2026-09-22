@@ -38,8 +38,12 @@ export default function JobBoardPage() {
     <Box sx={{ px: { xs: 2, sm: 0 } }}>
       <Stack spacing={1} sx={{ mb: 2 }}>
         <Typography variant="h1">Find your next role</Typography>
-        <Stack direction="row" spacing={1.5} alignItems="center">
-          <Box sx={{ flex: 1 }}>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={1.5}
+          alignItems={{ xs: "flex-start", sm: "center" }}
+        >
+          <Box sx={{ flex: 1, width: { xs: "100%", sm: "auto" } }}>
             <SearchBar value={filters.q ?? ""} onCommit={(q) => setFilters({ q: q || undefined })} />
           </Box>
           <FilterDrawerMobile
