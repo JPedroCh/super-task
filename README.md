@@ -61,6 +61,8 @@ cp .env.example .env
 
 ## Demonstration video
 
+[![Watch the demo video](https://img.youtube.com/vi/dCPVVv3RG1c/maxresdefault.jpg)](https://www.youtube.com/watch?v=dCPVVv3RG1c)
+
 ## What I'd improve with more time
 
 Explore a solution for dynamically populating the `skills` array when it is incomplete or incorrectly populated, potentially by identifying relevant keywords in the job description and mapping them to the available skills.
